@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variable Type Operator</title>
+    <style>
+        textarea{
+            resize: none;
+        }
+        button:hover{
+            cursor: pointer;
+        }
+        label{
+            margin-right: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <p>Enter Physic grade</p>
+    <input id="physic" placeholder="Physic grade">
+    <p>Enter Chemistry grade</p>
+    <input id="chemistry" placeholder="Chemistry grade">
+    <p>Enter Biology grade</p>
+    <input id="biology" placeholder="Biology grade">
+    <br>
+    <button id="avg">Calculate average</button><br>
+    <label for="avgDis">Average</label><textarea id="avgDis" rows="1" cols="20"></textarea>
+
+    <br><br>
+
+    <p>Enter degree in Celsius or Fahrenheit</p>
+    <input id="degree" placeholder="C or F">
+    <button id="C">Converse from C to F</button>
+    <button id="F">Converse from F to C</button><br>
+    <label for="conDegree">Converted degree</label><textarea id="conDegree" rows="1" cols="20"></textarea>
+
+    <br><br>
+
+    <p>Enter circle's radius for calculation</p>
+    <input id="rad" placeholder="Circle's radius">
+    <button id="conRad">Calculate circumference and area</button><br>
+    <label for="cir">circumference</label><textarea id="cir" rows="1" cols="20"></textarea><br>
+    <label for="area">Area</label><textarea id="area" rows="1" cols="20"></textarea>
+
+    <script>
+        document.getElementById('avg').onclick = function(){
+            let avg = (parseInt(document.getElementById('physic').value) + parseInt(document.getElementById('chemistry').value) + parseInt(document.getElementById('biology').value)) / 3;
+            console.log(avg);
+            document.getElementById('avgDis').value=avg;
+        }
+
+        document.getElementById('C').onclick = function(){
+            let cDegree = parseFloat(document.getElementById('degree').value);
+            let con = (cDegree/5) * 9 + 32;
+            document.getElementById('conDegree').innerHTML=con + "&deg;F";
+        }
+        document.getElementById('F').onclick = function(){
+            let fDegree = parseFloat(document.getElementById('degree').value);
+            let con = (fDegree-32)/9 * 5;
+            document.getElementById('conDegree').innerHTML=con + "&deg;C";
+        }
+
+        document.getElementById('conRad').onclick = function(){
+            let pi= 3.14;
+            let radius = parseFloat(document.getElementById('rad').value);
+            document.getElementById('cir').value = 2 * pi * radius;
+            document.getElementById('area').value = pi * Math.pow(radius, 2);
+        }
+    </script>
+</body>
+</html>
