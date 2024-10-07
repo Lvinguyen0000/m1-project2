@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        input{
+            width: 20rem;
+        }
+        button{
+            width: 10rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <input id="1stnum" type="text"><input id="2ndnum" type="text">
+    <br>
+    <button id="add">Addition(+)</button>
+    <button id="sub">Subtraction(-)</button>
+    <button id="mul">Multiplication(*)</button>
+    <button id="div">Division(/)</button>
+    <br>
+    <p id="res"></p>
+    
+    <script>
+        document.getElementById('add').onclick = function(){
+            document.getElementById('res').textContent = "Result addition: " + (parseFloat(document.getElementById('1stnum').value) + parseFloat(document.getElementById('2ndnum').value));
+        }
+        document.getElementById('sub').onclick = function(){
+            document.getElementById('res').textContent = "Result subtractio: " + (parseFloat(document.getElementById('1stnum').value) - parseFloat(document.getElementById('2ndnum').value));
+        }
+        document.getElementById('mul').onclick = function(){
+            document.getElementById('res').textContent = "Result multiplication: " + (parseFloat(document.getElementById('1stnum').value) * parseFloat(document.getElementById('2ndnum').value));
+        }
+        document.getElementById('div').onclick = function(){
+            document.getElementById('res').textContent = "Result division: " + (parseFloat(document.getElementById('1stnum').value) / parseFloat(document.getElementById('2ndnum').value));
+        }
+    </script>
+</body>
+</html>
