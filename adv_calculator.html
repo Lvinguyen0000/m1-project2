@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advance calculator</title>
+    <style>
+      .main {
+        border: 1px solid black;width: 30rem; text-align: center;
+      }
+      .display{
+        text-align: right; width: 98%;
+      }
+      table{
+        width: 100%;
+      }
+      th{
+        border: 2px solid black;
+      }
+      button{
+        width: 100%; height: 100%; cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Incomplete calculator</p>
+    <div class="main">
+      <input class="display" type="text" id="display" value="" readonly/>
+      <table>
+        <tr>
+          <th><button id="Rad">Rad</button></th>
+          <th><button id="blank"></button></th>
+          <th><button id="fibbo">x&#33;</button></th>
+          <th><button id="l_bracket">&#40;</button></th>
+          <th><button id="r_bracket">&#41;</button></th>
+          <th><button id="modul">&#37;</button></th>
+          <th><button id="AC">AC</button></th>
+        </tr>
+        <tr>
+          <th><button id="inv">Inv</button></th>
+          <th><button id="sin">sin</button></th>
+          <th><button id="ln">ln</button></th>
+          <th><button id="7">7</button></th>
+          <th><button id="8">8</button></th>
+          <th><button id="9">9</button></th>
+          <th><button id="division">&#247;</button></th>
+        </tr>
+        <tr>
+          <th><button id="pi">&#960;</button></th>
+          <th><button id="cos">cos</button></th>
+          <th><button id="log">log</button></th>
+          <th><button id="4">4</button></th>
+          <th><button id="5">5</button></th>
+          <th><button id="6">6</button></th>
+          <th><button id="multiply">&#215;</button></th>
+        </tr>
+        <tr>
+          <th><button id="e">e</button></th>
+          <th><button id="tan">tan</button></th>
+          <th><button id="sqrt">&#8730;</button></th>
+          <th><button id="1">1</button></th>
+          <th><button id="2">2</button></th>
+          <th><button id="3">3</button></th>
+          <th><button id="minus">&#45;</button></th>
+        </tr>
+        <tr>
+          <th><button id="Ans">Ans</button></th>
+          <th><button id="EXP">EXP</button></th>
+          <th><button id="pow">x<sup>y</sup></button></th>
+          <th><button id="0">0</button></th>
+          <th><button id=".">.</button></th>
+          <th><button id="equal">&#61;</button></th>
+          <th><button id="plus">&#43;</button></th>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+        let input = document.getElementById("display");
+        input.value = "0";
+        let answer = 0;
+        let operation_array = [];
+        
+        let buttons = document.getElementsByTagName('button');
+        for (let btn of buttons){
+            btn.onclick = function(){
+                checkInput(btn.id);
+            }
+        }
+
+        function checkInput(value){
+            let temp="0";
+            switch(value){
+                case "1":
+                    temp="1";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "2":
+                    temp="2";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "3":
+                    temp="3";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break; 
+                case "4":
+                    temp="4";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "5":
+                    temp="5";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;  
+                case "6":
+                    temp="6";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "7":
+                    temp="7";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "8":
+                    temp="8";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "9":
+                    temp="9";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "0":
+                    temp="0";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "plus":
+                    temp="+";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "minus":
+                    temp="-";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "multiply":
+                    temp="x";
+                    operation_array.push("*");
+                    addToDisplay(temp);
+                    break;
+                case "division":
+                    temp="/";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "Ans":
+                    temp = answer.toString();
+                    operation_array.push(temp);
+                    addToDisplay("Ans");
+                    break;
+                case "AC":
+                    operation_array = [];
+                    input.value = "0"
+                    break;
+                case "l_bracket":
+                    temp = "("
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "r_bracket":
+                    temp = ")"
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "pow":
+                    temp = "^"
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "sqrt":
+                    temp = "sqrt("
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "sin":
+                    temp = "sin("
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                break;
+                    case "cos":
+                    temp = "cos("
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                break;
+                    case "tan":
+                    temp = "tan("
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "log":
+                    temp = "log("
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "ln":
+                    temp = "ln("
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "pi":
+                    temp = "pi";
+                    operation_array.push("3.14");
+                    addToDisplay(temp);
+                    break;
+                case "modul":
+                    temp = "%";
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "e":
+                    temp = "e"
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case ".":
+                    temp = "."
+                    operation_array.push(temp);
+                    addToDisplay(temp);
+                    break;
+                case "equal":
+                    equal();
+                    break;
+            }
+            
+        }
+
+        function addToDisplay(value){
+            if (input.value == "0") input.value = value;
+            else input.value = input.value + value; 
+        }
+
+        function equal (){
+            let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "3.14"];
+            let operators = [".", "+", "-", "*", "/", "%", "^", "sqrt("]
+            let num_str1 = ""
+            let num_str2 = ""
+            let num1 = 0;
+            let num2 = 0;
+            operator = null;
+            for (i of operation_array){
+                if (numbers.includes(i)){
+                    if (!operator){
+                        num_str1 += i;
+                    }
+                    else {
+                        num_str2 +=i;
+                    }
+                }
+                else if (operators.includes(i) ){
+                    if (!operator) {
+                        operator = i; 
+                    }
+                    else {
+                        num1 = parseFloat(num_str1);
+                        num2 = parseFloat(num_str2);
+                        num1 = calculate_2numbers(num1, num2, operator);
+                        num_str1 = num1.toString();
+                        operator = i;
+                        num_str2 = "0";
+                    }
+                }
+            }
+            if(operator) {
+                num1 = parseFloat(num_str1);
+                num2 = parseFloat(num_str2);
+                num1 = calculate_2numbers(num1, num2, operator)
+                num_str1 = num1.toString();
+            }
+            answer = num_str1;
+            operation_array = [];
+            operation_array.push(num_str1);
+            input.value = num_str1;
+        }
+
+        function convert_to_float(number){
+            let temp = number
+            let length = number.toString().length;
+            for (let i = 0; i < length; i++){
+                temp /= 10;
+            }
+            return temp
+        }
+        
+        function calculate_2numbers(num1, num2, operator){
+            switch (operator){
+                    case "+": num1 += num2; break;
+                    case "-": num1 -= num2; break;
+                    case "*": num1 *= num2; break;
+                    case "/": num1 /= num2; break;
+                    case ".": num1 += convert_to_float(num2); break;
+                    case "%": num1 = num1 % num2; break;
+                    case "^": num1 = Math.pow(num1, num2); break;
+                    case "sqrt(": num1 = Math.sqrt(num2, 2); break;
+                }
+            return num1;
+        }
+    </script>
+  </body>
+</html>
