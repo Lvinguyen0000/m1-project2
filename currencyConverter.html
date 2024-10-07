@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        .main{
+            line-height: 0.1rem;
+        }
+        .outer{
+            display: inline-block;
+            text-align: center;
+        }
+        .block{
+            display: block;
+        }
+        .dropdown{
+            width: 10rem;
+        }
+        .confirm{
+            color: white;
+            background-color: blue;
+            cursor: pointer;
+        }
+        #res{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="outer">
+            <p class="block">Amount</p>
+            <input class="block" id="amount">
+        </div>
+        <div class="outer">
+            <p class="block">From Currency</p>
+            <select class="block dropdown" id="from">
+                <option value="VND">VND</option>
+                <option value="USD">USD</option>
+                <option value="EURO">EURO</option>
+            </select>
+        </div>
+        <div class="outer">
+            <p class="block">To Currency</p>
+            <select class="block dropdown" id="to">
+                <option value="USD">USD</option>
+                <option value="EURO">EURO</option>
+                <option value="VND">VND</option>
+            </select>
+        </div>
+        <button class="outer confirm" id="confirm">Convert</button><br>
+        <p id="res"></p>
+    </div>
+
+    <script>
+        document.getElementById('confirm').onclick = function(){
+            let amount = document.getElementById('amount').value;
+            let fromUnit = document.getElementById('from').value;
+            let toUnit = document.getElementById('to').value;
+            let result = 0;
+
+            switch(fromUnit){
+                case "VND":
+                    switch(toUnit){
+                        case "VND": result = amount; document.getElementById('res').textContent = "Result: " + result + " VND"; break;
+                        case "USD": result = amount * 0.000040; document.getElementById('res').textContent = "Result: " + result + " USD"; break;
+                        case "EURO": result = amount * 0.000037; document.getElementById('res').textContent = "Result: " + result + " EURO"; break;
+                    }
+                    break;
+                case "USD":
+                    switch (toUnit){
+                        case "VND": result = amount * 24847.50; document.getElementById('res').textContent = "Result: " + result + " VND"; break;
+                        case "USD": result = amount; document.getElementById('res').textContent = "Result: " + result + " USD"; break;
+                        case "EURO": result = amount * 0.91; document.getElementById('res').textContent = "Result: " + result + " EURO"; break;
+                    }
+                    break;
+                case "EURO":
+                    switch (toUnit){
+                        case "VND": result = amount * 27262.06; document.getElementById('res').textContent = "Result: " + result + " VND"; break;
+                        case "USD": result = amount * 1.10; document.getElementById('res').textContent = "Result: " + result + " USD"; break;
+                        case "EURO": result = amount; document.getElementById('res').textContent = "Result: " + result + " EURO"; break;
+                    }
+                    break;
+            }
+        }
+    </script>
+
+</body>
+</html>
