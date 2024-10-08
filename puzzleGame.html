@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Game</title>
+    <style>
+        .main{
+            text-align: center;
+        }
+        .main .red,
+        .main .green,
+        .main .blue,
+        .main .yellow,
+        .main .purple{
+            display: block;
+            width: 20rem;
+            height: 5rem;
+        }
+        .red {background-color: red;}
+        .green {background-color: green;}
+        .blue {background-color: blue;}
+        .yellow {background-color: yellow;}
+        .purple {background-color: purple;}
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div id="p1" class="red"></div>
+        <div id="p2" class="green"></div>
+        <div id="p3" class="blue"></div>
+        <div id="p4" class="yellow"></div>
+        <div id="p5" class="purple"></div>
+    </div>
+    <p id="res"></p>
+
+    <script>
+        let color = ["red", "green", "blue", "yellow", "purple"];
+        let p1 = document.getElementById('p1');
+        let p2 = document.getElementById('p2');
+        let p3 = document.getElementById('p3');
+        let p4 = document.getElementById('p4');
+        let p5 = document.getElementById('p5');
+
+        p1.onclick = function(){change_color(p1)};
+        p2.onclick = function(){change_color(p2)};
+        p3.onclick = function(){change_color(p3)};
+        p4.onclick = function(){change_color(p4)};
+        p5.onclick = function(){change_color(p5)};
+
+        function change_color(p){
+            let cur_col = p.className;
+            let index = color.indexOf(cur_col);
+            p.removeAttribute('class');
+            p.classList.add(color[(index + 1)%color.length]);
+            check_color(p.className);
+        }
+
+        function check_color(color){
+            let res = document.getElementById("res");
+            if (document.getElementsByClassName(color).length == 5){
+                res.textContent = "All matched";
+            }
+            else res.textContent = "";
+        }
+
+
+    </script>
+
+    
+</body>
+</html>
