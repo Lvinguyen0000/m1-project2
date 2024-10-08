@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show days in a month</title>
+</head>
+<body>
+    <input id="mo" placeholder="Nhập tháng">
+    <button id="calc">Tính số ngày</button>
+    <br>
+    <p id="dis"></p>
+
+    <script>
+        document.getElementById("calc").onclick = function(){
+            let month = parseInt(document.getElementById("mo").value);
+            let days = ""
+            switch(month){
+                case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                    days = "31"; break;
+                case 4: case 6: case 9: case 11:
+                    days = "30"; break;
+                case 2: days = "28 hoặc 29"; break;
+                default: days = "0"; break
+            }
+            document.getElementById("dis").textContent = "Tháng " + month + " có " + days + " ngày";
+        }
+    </script>
+    
+</body>
+</html>
