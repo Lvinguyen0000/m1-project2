@@ -80,6 +80,9 @@
         input.value = "0";
         let answer = 0;
         let operation_array = [];
+        let prior_op = [];
+        let prior_op2 = [];
+        let prior_op3 = [];
         
         let buttons = document.getElementsByTagName('button');
         for (let btn of buttons){
@@ -154,11 +157,13 @@
                 case "multiply":
                     temp="x";
                     operation_array.push("*");
+                    prior_op.push(operation_array.length -1);
                     addToDisplay(temp);
                     break;
                 case "division":
                     temp="/";
                     operation_array.push(temp);
+                    prior_op.push(operation_array.length -1);
                     addToDisplay(temp);
                     break;
                 case "Ans":
@@ -168,6 +173,9 @@
                     break;
                 case "AC":
                     operation_array = [];
+                    prior_op = [];
+                    prior_op2 = [];
+                    prior_op3 = [];
                     input.value = "0"
                     break;
                 case "l_bracket":
@@ -183,36 +191,43 @@
                 case "pow":
                     temp = "^"
                     operation_array.push(temp);
+                    prior_op.push(operation_array.length -1);
                     addToDisplay(temp);
                     break;
                 case "sqrt":
                     temp = "sqrt("
                     operation_array.push(temp);
+                    prior_op2.push(operation_array.length -1);
                     addToDisplay(temp);
                     break;
                 case "sin":
                     temp = "sin("
                     operation_array.push(temp);
+                    prior_op2.push(operation_array.length -1);
                     addToDisplay(temp);
                 break;
                     case "cos":
                     temp = "cos("
                     operation_array.push(temp);
+                    prior_op2.push(operation_array.length -1);
                     addToDisplay(temp);
                 break;
                     case "tan":
                     temp = "tan("
                     operation_array.push(temp);
+                    prior_op2.push(operation_array.length -1);
                     addToDisplay(temp);
                     break;
                 case "log":
                     temp = "log("
                     operation_array.push(temp);
+                    prior_op2.push(operation_array.length -1);
                     addToDisplay(temp);
                     break;
                 case "ln":
                     temp = "ln("
                     operation_array.push(temp);
+                    prior_op2.push(operation_array.length -1);
                     addToDisplay(temp);
                     break;
                 case "pi":
@@ -223,6 +238,7 @@
                 case "modul":
                     temp = "%";
                     operation_array.push(temp);
+                    prior_op.push(operation_array.length -1);
                     addToDisplay(temp);
                     break;
                 case "e":
@@ -233,6 +249,13 @@
                 case ".":
                     temp = "."
                     operation_array.push(temp);
+                    prior_op.push(operation_array.length -1);
+                    addToDisplay(temp);
+                    break;
+                case "fibbo":
+                    temp = "!"
+                    operation_array.push(temp);
+                    prior_op3.push(operation_array.length -1);
                     addToDisplay(temp);
                     break;
                 case "equal":
@@ -247,21 +270,139 @@
             else input.value = input.value + value; 
         }
 
+        function merge(num_str1, num_str2){
+            return num_str1 + num_str2;
+        }
+
+        function isNumber(num) {
+            num = parseFloat(num);
+            return typeof num === 'number' && isFinite(num);
+        }
+
+        //https://stackoverflow.com/questions/7944239/generating-fibonacci-sequence
+        function fibonacci(n) {
+            return n < 1 ? 0
+                    : n <= 2 ? 1
+                    : fibonacci(n - 1) + fibonacci(n - 2)
+        }
+
+
+        function priority_calc(index){
+            let h_index = 0
+            let t_index = operation_array.length;
+            let num1 = num2 = "";
+            for (let i = index - 1; i => 0; i--){
+                if(!isNumber(operation_array[i]) && i && operation_array[i] != ""){
+                    h_index = i + 1;
+                    for (let j = h_index; j < index; j++){
+                        num1 = merge(num1, operation_array[j]);
+                        operation_array[j] = "";
+                    }
+                    break;
+                }
+            }
+            if (!h_index){
+                for (let j = h_index; j < index; j++){
+                    num1 = merge(num1, operation_array[j]);
+                    operation_array[j] = "";
+                }
+            }
+            for (let i = index + 1; i < operation_array.length; i++){
+                if(!isNumber(operation_array[i]) && i!= (operation_array.length-1) && operation_array[i] != ""){
+                    t_index = i;
+                    for (let j = index + 1; j < t_index; j++){
+                        num2 = merge(num2, operation_array[j]);
+                        operation_array[j] = "";
+                    }
+                    break;
+                }
+            }
+            if (t_index == operation_array.length){
+                for (let j = index + 1; j < t_index; j++){
+                    num2 = merge(num2, operation_array[j]);
+                    operation_array[j] = "";
+                }
+            }
+
+            num1 = calculate_2numbers(parseFloat(num1), parseFloat(num2), operation_array[index]);
+            operation_array[h_index] = num1;            
+            operation_array[index] = "";
+        }
+
+        function priority_calc2 (index){
+            let t_index = operation_array.length;
+            let num1 = num2 = "";
+            for (let i = index + 1; i < operation_array.length; i++){
+                if(!isNumber(operation_array[i]) && i!= (operation_array.length-1) && operation_array[i] != ""){
+                    t_index = i;
+                    for (let j = index + 1; j < t_index; j++){
+                        num2 = merge(num2, operation_array[j]);
+                        operation_array[j] = "";
+                    }
+                    break;
+                }
+            }
+            if (t_index == operation_array.length){
+                for (let j = index + 1; j < t_index; j++){
+                    num2 = merge(num2, operation_array[j]);
+                    operation_array[j] = "";
+                }
+            }
+
+            num1 = calculate_2numbers(parseFloat(num1), parseFloat(num2), operation_array[index]);
+            operation_array[index] = num1;
+        }
+
+        function priority_calc3 (index){
+            let h_index = 0;
+            let num1 = num2 = "";
+            for (let i = index - 1; i => 0; i--){
+                if(!isNumber(operation_array[i]) && i && operation_array[i] != ""){
+                    h_index = i + 1;
+                    for (let j = h_index; j < index; j++){
+                        num1 = merge(num1, operation_array[j]);
+                        operation_array[j] = "";
+                    }
+                    break;
+                }
+            }
+            if (!h_index){
+                for (let j = h_index; j < index; j++){
+                    num1 = merge(num1, operation_array[j]);
+                    operation_array[j] = "";
+                }
+            }
+
+            num1 = calculate_2numbers(parseFloat(num1), parseFloat(num2), operation_array[index]);
+            operation_array[h_index] = num1;            
+            operation_array[index] = "";
+        }
+
         function equal (){
-            let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "3.14"];
-            let operators = [".", "+", "-", "*", "/", "%", "^", "sqrt("]
+            for (let i of prior_op2){
+                priority_calc2(i);
+            }
+            for (let i of prior_op3){
+                priority_calc3(i);
+            }
+            for (let i of prior_op){
+                priority_calc(i);
+            }
+            
+
+            let operators = ["+", "-"]
             let num_str1 = ""
             let num_str2 = ""
             let num1 = 0;
             let num2 = 0;
             operator = null;
             for (i of operation_array){
-                if (numbers.includes(i)){
+                if (isNumber(i)){
                     if (!operator){
-                        num_str1 += i;
+                        num_str1 = merge(num_str1, i);
                     }
                     else {
-                        num_str2 +=i;
+                        num_str2 = merge(num_str2, i);
                     }
                 }
                 else if (operators.includes(i) ){
@@ -277,6 +418,7 @@
                         num_str2 = "0";
                     }
                 }
+                else continue;
             }
             if(operator) {
                 num1 = parseFloat(num_str1);
@@ -291,12 +433,11 @@
         }
 
         function convert_to_float(number){
-            let temp = number
             let length = number.toString().length;
             for (let i = 0; i < length; i++){
-                temp /= 10;
+                number /= 10;
             }
-            return temp
+            return number;
         }
         
         function calculate_2numbers(num1, num2, operator){
@@ -308,9 +449,10 @@
                     case ".": num1 += convert_to_float(num2); break;
                     case "%": num1 = num1 % num2; break;
                     case "^": num1 = Math.pow(num1, num2); break;
+                    case "!": num1 = fibonacci(num1); break;
                     case "sqrt(": num1 = Math.sqrt(num2, 2); break;
                 }
-            return num1;
+            return num1.toString();
         }
     </script>
   </body>
