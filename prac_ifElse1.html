@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If Else 1</title>
+</head>
+<body>
+    <input id="b1a"><input id="b1b"><br>
+    <button id="b1btn">Check</button><br>
+    <p id="b1dis"></p>
+
+    <input id="b2tuoi"><br>
+    <button id="b2btn">Check</button><br>
+    <p id="b2dis"></p>
+
+    <input id="b3int"><br>
+    <button id="b3btn">Check</button><br>
+    <p id="b3dis"></p>
+
+    <input id="b4int1"><input id="b4int2"><input id="b4int3"><br>
+    <button id="b4btn">Check</button><br>
+    <p id="b4dis"></p>
+
+    <input id="b5src1" placeholder="Diem kiem tra"><input id="b5src2" placeholder="Diem giua ky"><input id="b5src3" placeholder="Diem cuoi ky"><br>
+    <button id="b5btn">Check</button><br>
+    <p id="b5dis"></p>
+
+    <input id="b6money" placeholder="Doanh so ban hang"><br>
+    <button id="b6btn">Check</button><br>
+    <p id="b6dis"></p>
+
+    <input id="b7call" placeholder="So lan su dung dien thoai"><br>
+    <button id="b7btn">Check</button><br>
+    <p id="b7dis"></p>
+
+    <script>
+        document.getElementById("b1btn").onclick = function(){
+            let display = document.getElementById("b1dis");
+            (!(document.getElementById("b1a").value%document.getElementById("b1b").value)) ? display.textContent = "a chia het cho b" : display.textContent = "a khong chia het cho b";
+        }
+
+        document.getElementById("b2btn").onclick = function(){
+            let display = document.getElementById("b2dis");
+            (parseInt(document.getElementById("b2tuoi").value)>15)?display.textContent="Duoc hoc lop 10" : display.textContent="Khong duoc hoc lop 10";
+        }
+
+        document.getElementById("b3btn").onclick = function(){
+            let display = document.getElementById("b3dis");
+            let number = document.getElementById("b3int").value; 
+            (parseInt(number)>0)?display.textContent="Lon hon 0": (parseInt(number)<0)?display.textContent="Nho hon 0" : display.textContent="0";
+        }
+
+        document.getElementById("b4btn").onclick = function(){
+            let a = parseInt(document.getElementById("b4int1").value);
+            let b = parseInt(document.getElementById("b4int2").value);
+            let c = parseInt(document.getElementById("b4int3").value);
+            if (a < b) a = b;
+            if (a < c) a = c;
+            document.getElementById("b4dis").textContent = a;
+        }
+
+        document.getElementById("b5btn").onclick = function(){
+            let display = document.getElementById("b5dis");
+            let a = parseInt(document.getElementById("b5src1").value);
+            let b = parseInt(document.getElementById("b5src2").value);
+            let c = parseInt(document.getElementById("b5src3").value);
+            let avg = (a + b + c)/3;
+            if (avg >= 8) display.textContent = "Gioi";
+            else if ( avg >= 6.5) display.textContent = "Kha";
+            else if (avg >= 5) display.textContent = "Trung binh";
+            else display.textContent = "Yeu";
+        }
+
+        document.getElementById("b6btn").onclick = function(){
+            let display = document.getElementById("b6dis");
+            let a = parseInt(document.getElementById("b6money").value);
+            if (a > 300) display.textContent = "50% hoa hong";
+            else if ( a >= 200) display.textContent = "30% hoa hong";
+            else if (100 >= 5) display.textContent = "10% hoa hong";
+            else display.textContent = "Khong hoa hong";
+        }
+
+        document.getElementById("b7btn").onclick = function(){
+            let display = document.getElementById("b7dis");
+            let a = parseInt(document.getElementById("b7call").value);
+            if (a > 300) display.textContent = "1,000,000 VND";
+            else if ( a >= 200) display.textContent = "700,000 VND";
+            else if (100 >= 5) display.textContent = "500,000 VND";
+            else display.textContent = "100,000VND";
+        }
+
+    </script>
+</body>
+</html>
