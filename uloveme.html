@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click the NO</title>
+    <style>
+        .why{
+            position: relative; color:red; background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <h2>Do you love me?</h2>
+    <button id="yes">YES</button>
+    <button id="no">NO</button>
+
+    <script>
+        document.getElementById("yes").onclick = function(){
+            alert("<3");
+        }
+
+        let no_btn = document.getElementById("no");
+        console.log(window.innerHeight);
+        console.log(window.innerWidth);
+
+        no_btn.onmouseover = function(){
+            no_btn.classList.add("why");
+            no_btn.style.left = Math.random() * window.innerWidth + "px";
+            no_btn.style.top = Math.random() * window.innerHeight + "px";
+        }
+    </script>
+</body>
+</html>
