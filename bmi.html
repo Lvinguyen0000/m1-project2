@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body-shame</title>
+</head>
+<body>
+    <input id="height" placeholder="Enter height (m)">
+    <input id="weight" placeholder="Enter weight (kg)">
+    <br>
+    <button id="calc">Calculate BMI</button>
+    <br>
+    <input id="bmi" placeholder="Your BMI" readonly>
+
+    <script>
+        document.getElementById("calc").onclick = function(){
+            let height = document.getElementById("height").value;
+            let weight = document.getElementById("weight").value;
+            let bmi = Math.floor(weight / (height ** 2));
+            let display = document.getElementById("bmi")
+
+            if (bmi < 18.5)  display.value = bmi + ": Underweight";
+            else if (bmi < 25) display.value = bmi + ": Normal";
+            else if (bmi < 30) display.value = bmi + ": Overweight";
+            else display.value = bmi + ": Obese";
+        }
+    </script>
+</body>
+</html>
