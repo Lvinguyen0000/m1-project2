@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double loop</title>
+    <style>
+        #main .cell{
+            border: 3px solid black; text-align: center;
+        }
+        #main table{
+            border-collapse: collapse; width: 20rem; height: 20rem;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="main"></div>
+
+    <script>
+        let ele = document.getElementById("main");
+        function a_table(ele){
+            let table = document.createElement("table")
+            for (let i = 1; i <= 10; i++){
+                let row = document.createElement("tr");
+                for (let j = 1; j <= 10; j++){
+                    let cell = document.createElement("td");
+                    cell.classList.add("cell");
+                    cell.innerHTML = i * j;
+                    row.appendChild(cell);
+                }
+                table.appendChild(row)
+            }
+            ele.appendChild(table);
+        }
+        a_table(ele);
+    </script>
+</body>
+</html>
