@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If else 2</title>
+</head>
+<body>
+    <p>Bài 1</p>
+    <input id="b1in" placeholder="Nhập độ C"><br>
+    <button id="b1btn">Check</button><br>
+    <input id="b1out"><br>
+
+    <p>Bài 2</p>
+    <input id="b2in" placeholder="Nhập vào số mét"><br>
+    <button id="b2btn">Check</button><br>
+    <input id="b2out"><br>
+
+
+    <p>Bài 3</p>
+    <input id="b3in" placeholder="Cạnh của hình vuông"><br>
+    <button id="b3btn">Check</button><br>
+    <input id="b3out"><br>
+
+    <p>Bài 4</p>
+    <input id="b4in1" placeholder="Cạnh a"><input id="b4in2" placeholder="Cạnh b"><br>
+    <button id="b4btn">Check</button><br>
+    <input id="b4out"><br>
+
+    <p>Bài 5</p>
+    <input id="b5in1" placeholder="Cạnh kề a"><input id="b5in2" placeholder="cạnh kề b"><br>
+    <button id="b5btn">Check</button><br>
+    <input id="b5out"><br>
+
+    <p>Bài 6</p>
+    <input id="b6in" placeholder="Nhập phương trình bậc 1: ax+b=y"><br>
+    <button id="b6btn">Check</button><br>
+    <input id="b6out"><br>
+
+    <p>Bài 7</p>
+    <input id="b7in" placeholder="Nhập phương trình bậc 2: ax^2+bx+c=y"><br>
+    <button id="b7btn">Check</button><br>
+    <input id="b7out1"><input id="b7out2"><br>
+
+    <p>Bài 8</p>
+    <input id="b8in" placeholder="Tuổi"><br>
+    <button id="b8btn">Check</button><br>
+    <input id="b8out"><br>
+
+    <p>Bài 9</p>
+    <input id="b9in1" placeholder="Cạnh a"><input id="b9in2" placeholder="Cạnh b"><input id="b9in3" placeholder="Cạnh c"><br>
+    <button id="b9btn">Check</button><br>
+    <input id="b9out"><br>
+
+    <p>Bài 10</p>
+    <input id="b10in" placeholder="Mức điện sử dụng (kWh)"><br>
+    <button id="b10btn">Check</button><br>
+    <input id="b10out"><br>
+
+    <p>Bài 11</p>
+    <input id="b11in" placeholder="Thu nhập cá nhân (triệu)"><br>
+    <button id="b11btn">Check</button><br>
+    <input id="b11out"><br>
+
+    <p>Bài 12</p>
+    <input id="b12in1" placeholder="Số tiền ban đầu"><input id="b12in2" placeholder="Số tháng cho vay"><input id="b12in3" placeholder="Lãi xuất hàng tháng"><br>
+    <button id="b12btn">Check</button><br>
+    <input id="b12out"><br>
+
+    <script>
+        function merge(num_str1, num_str2){
+            return num_str1 + num_str2;
+        }
+
+        function isNumber(num) {
+            num = parseFloat(num);
+            return typeof num === 'number' && isFinite(num);
+        }
+
+        document.getElementById("b1btn").onclick = function(){
+            let input = parseInt(document.getElementById("b1in").value);
+            document.getElementById("b1out").value = input * 9 / 5 + 32;
+        }
+        document.getElementById("b2btn").onclick = function(){
+            let input = parseInt(document.getElementById("b2in").value);
+            document.getElementById("b2out").value = input * 3.2808;
+        }
+        document.getElementById("b3btn").onclick = function(){
+            let input = parseInt(document.getElementById("b3in").value);
+            document.getElementById("b3out").value = input * input;
+        }
+        document.getElementById("b4btn").onclick = function(){
+            let input1 = parseInt(document.getElementById("b4in1").value);
+            let input2 = parseInt(document.getElementById("b4in2").value);
+            document.getElementById("b4out").value = input1 * input2;
+        }
+        document.getElementById("b5btn").onclick = function(){
+            let input1 = parseInt(document.getElementById("b5in1").value);
+            let input2 = parseInt(document.getElementById("b5in2").value);
+            document.getElementById("b5out").value = (input1 * input2) /2;
+        }
+        document.getElementById("b6btn").onclick = function(){
+            //a x + b = y
+            //0 1 2 3 4 5
+
+            let input = document.getElementById("b6in").value;
+            let array = [];
+            let res = 0;
+            if (input[0] == "x") array.push("1");
+            for (let i of input) array.push(i);
+
+            if (array[2] == "+") res = (parseInt(array[5]) - parseInt(array[3])) / parseInt(array[0]);
+            else if (array[2] == "-") res = (parseInt(array[5]) + parseInt(array[3])) / parseInt(array[0]);
+            else if (array[2] == "*") res = (parseInt(array[5]) / parseInt(array[3])) / parseInt(array[0]);
+            else if (array[2] == "/") res = (parseInt(array[5]) * parseInt(array[3])) / parseInt(array[0]);
+
+            document.getElementById("b6out").value = "x = " + res;
+        }
+        document.getElementById("b7btn").onclick = function(){
+            //a x ^ 2 + b x + c = y
+            //0 1 2 3 4 5 6 7 8 9 10
+
+            let input = document.getElementById("b7in").value;
+            let dis1 = document.getElementById("b7out1");
+            let dis2 = document.getElementById("b7out2");
+            let op = [];
+            let x1 = x2 = 0;
+
+            for (let i=0; i<input.length; i++){
+                if (input[i] == "x" && !i) {
+                    op.push("1"); 
+                    op.push("x");
+                }
+                else if (input[i] == "x" && input[i - 1] == "+") {
+                    op.push("1"); 
+                    op.push("x");
+                }
+                else {
+                    if (isNumber(input[i]) && isNumber(input[i - 1])){
+                        op[op.length-1] = merge(op[op.length-1], input[i]);
+                    }
+                    else op.push(input[i]);
+                }
+            }
+
+            let delta = Math.pow(parseInt(op[5]), 2) - (4 * parseInt(op[0] * parseInt(op[8])));
+
+            if (delta < 0){
+                dis1.value = dis2.value = "Phường trình vô nghiệm";
+            }
+            else if (!delta){
+                x1 = x2 = -1 * (parseInt(op[5]) / (2 * parseInt(op[0])));
+                dis1.value = "x1 = " + x1; 
+                dis2.value = "x2 = " + x2;
+            }
+            else if (delta > 0){
+                x1 = (-1 * parseInt(op[5]) + Math.sqrt(delta, 2)) / (2 * parseInt(op[0]));
+                x2 = (-1 * parseInt(op[5]) - Math.sqrt(delta, 2)) / (2 * parseInt(op[0]));
+                dis1.value = "x1 = " + x1; 
+                dis2.value = "x2 = " + x2;
+            }
+        }
+        document.getElementById("b8btn").onclick = function(){
+            let input = parseInt(document.getElementById("b8in").value);
+            document.getElementById("b8out").value = (input<120 && input > 0) ? "Đây là tuouoir của một người" : "Đây không phải là tuổi của một người";
+        }
+        document.getElementById("b9btn").onclick = function(){
+            let input1 = parseInt(document.getElementById("b9in1").value);
+            let input2 = parseInt(document.getElementById("b9in2").value);
+            let input3 = parseInt(document.getElementById("b9in3").value);
+            document.getElementById("b9out").value = (input1 > 0 &&
+                                                    input2 > 0 &&
+                                                    input3 > 0 &&
+                                                    (input1 + input2) > input3 &&
+                                                    (input1 + input3) > input2 &&
+                                                    (input2 + input3) > input1)?
+                                                    "3 cạnh của tam giác" :
+                                                    "Không phải 3 cạnh của tam giác"
+        }
+        document.getElementById("b10btn").onclick = function(){
+            let input = parseInt(document.getElementById("b10in").value);
+            let res = 0
+
+            if (input <= 50) res = 1806 * input;
+            else if (input <= 100) res = 1866 * input;
+            else if (input <= 200) res = 2167 * input;
+            else if (input <= 300) res = 2728 * input;
+            else if (input <= 400) res = 3050 * input;
+            else res = 3151 * input;
+
+            document.getElementById("b10out").value = res + " VND";
+        }
+        document.getElementById("b11btn").onclick = function(){
+            let input = parseInt(document.getElementById("b11in").value);
+            let res = 0
+
+            if (input <= 5) res = input * 5 / 100;
+            else if (input <= 10) res = input * 10 / 100 - 0.25;
+            else if (input <= 18) res = input * 15 /100 -0.75;
+            else if (input <= 32) res = input * 20 / 100 -1.65;
+            else if (input <= 52) res = input * 25 / 100 - 3.25;
+            else if (input <= 80) res = input * 30 / 100 - 5.85;
+            else res = input * 35 / 100 - 9.85;
+
+            document.getElementById("b11out").value = res + "tr VND";
+        }
+        document.getElementById("b12btn").onclick = function(){
+            let input1 = parseInt(document.getElementById("b12in1").value);
+            let input2 = parseInt(document.getElementById("b12in2").value);
+            let input3 = parseInt(document.getElementById("b12in3").value);
+            let interestRate = ((input3 / 100) + 1);
+            let res = input1 * Math.pow(interestRate, input2).toFixed(4);        
+            document.getElementById("b12out").value = "Số tiền phải trả là : " + res + " VND";
+        }
+    </script>
+</body>
+</html>
