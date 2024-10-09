@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good fast cheap</title>
+    <style>
+        body{
+            line-height: 0.1px;
+        }
+        .switch {
+            position: relative;
+            display: block;
+            width: 60px;
+            height: 34px;
+            margin-bottom: 0.5rem;
+        }
+
+            /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+            /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .goodslider {
+            background-color: green;
+        }
+
+        input:focus + .goodslider {
+            box-shadow: 0 0 1px green;
+        }
+        input:checked + .fastslider {
+            background-color: red;
+        }
+
+        input:focus + .fastslider {
+            box-shadow: 0 0 1px red;
+        }
+        input:checked + .cheapslider {
+            background-color: blue;
+        }
+
+        input:focus + .cheapslider {
+            box-shadow: 0 0 1px blue;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h3>Good</h3>
+    <label class="switch">
+        <input id="good" type="checkbox">
+        <span class="slider goodslider round"></span>
+    </label>
+    <h3>Fast</h3>
+    <label class="switch">
+        <input id="fast" type="checkbox">
+        <span class="slider fastslider round"></span>
+    </label>
+    <h3>Cheap</h3>
+    <label class="switch">
+        <input id="cheap" type="checkbox">
+        <span class="slider cheapslider round"></span>
+    </label>
+
+    <script>
+        let checked_sta =  {first: "", last: "" };
+        let good = document.getElementById("good");
+        let fast = document.getElementById("fast");
+        let cheap = document.getElementById("cheap");
+        
+        function checking(ele){
+            if (!checked_sta.last){
+                checked_sta.last = checked_sta.first;
+                checked_sta.first = ele;
+            }
+            else{
+                checked_sta.last.checked = false;
+                checked_sta.last = checked_sta.first;
+                checked_sta.first = ele; 
+            }
+        }
+
+        good.onclick = function(){checking(good)};
+        fast.onclick = function(){checking(fast)};
+        cheap.onclick = function(){checking(cheap)};
+
+    </script>
+</body>
+</html>
